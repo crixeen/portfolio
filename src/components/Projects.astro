@@ -1,0 +1,381 @@
+---
+import { PROJECTS } from '../js/projects';
+
+const featured = PROJECTS[0];
+const rest = PROJECTS.slice(1, 3);
+---
+
+<!-- LIGHTBOX -->
+<div class='lightbox' id='lightbox'>
+
+	<button class='lightbox-close' id='lightboxClose'>✕</button>
+	<button class='lightbox-prev' id='lightboxPrev'>‹</button>
+	<button class='lightbox-next' id='lightboxNext'>›</button>
+
+	<div class='lightbox-img-wrap' id='lightboxImgWrap'>
+		<img class='lightbox-img' id='lightboxImg' src='' alt='' />
+	</div>
+
+	<div class='lightbox-counter' id='lightboxCounter'></div>
+
+</div>
+
+<!-- PROJECT MODAL -->
+<div class='modal-overlay' id='modalOverlay'></div>
+
+<div class='modal' id='projectModal'>
+	<button class='modal-close' id='modalClose'>✕</button>
+	<div id='modalInner'></div>
+</div>
+
+<!-- ALL PROJECTS OVERLAY -->
+<div class='all-projects-overlay' id='allProjectsOverlay'>
+
+	<div class='ap-header'>
+		<div class='ap-logo'>Crix<em>en</em> · Proyectos</div>
+		<button class='ap-close' id='apClose'>← Volver</button>
+	</div>
+	
+	<div class='ap-body'>
+	
+		<div class='ap-top'>
+	
+			<div class='section-tag'>Todos los trabajos</div>
+	
+			<h2 class='ap-title'>Proyectos <em>completos</em></h2>
+	
+			<div class='ap-controls'>
+				<div class='ap-search-wrap'>
+					<span class='ap-search-icon'>⌕</span>
+					<input class='ap-search' id='apSearch' type='text' placeholder='Buscar proyecto...' />
+				</div>
+				<div class='ap-filters' id='apFilters'></div>
+			</div>
+	
+		</div>
+	
+		<div class='ap-grid' id='apGrid'></div>
+		<div class='ap-no-results' id='apNoResults' style='display:none'>No se encontraron proyectos.</div>
+	
+	</div>
+
+</div>
+
+<!-- SECTION -->
+<section id='projects'>
+
+	<div class='projects-header'>
+
+		<div>
+			<div class='section-tag'>El menú</div>
+			<h2 class='section-title'>Proyectos <em>seleccionados</em></h2>
+		</div>
+
+		<button class='btn-ghost' id='btnVerTodos' style='background:none;border:none;cursor:none;'> Ver todos </button>
+
+	</div>
+
+	<div class='projects-grid'>
+		
+		<!-- Featured -->
+		<div class='project-card featured reveal'>
+		
+			<div class='project-img-wrap'>
+		
+				<div class={`project-thumb-placeholder featured-ph ${featured.coverClass}`} style='height:280px;'>
+					<img src={featured.cover} alt={featured.title} class='project-thumb-img' />
+				</div>
+		
+				<div class='project-overlay'>
+					{featured.tags.map((t) => <span class='project-badge'>{t}</span>)}
+				</div>
+		
+			</div>
+		
+			<div class='project-body'>
+				<h3 class='project-name'>{featured.title}</h3>
+				<p class='project-desc'>{featured.desc}</p>
+				<button class='project-link' data-project={featured.id}>Ver detalles →</button>
+			</div>
+		
+		</div>
+
+		<!-- Rest -->
+		{
+			rest.map((p, i) => (
+				<div class={`project-card reveal reveal-delay-${i + 1}`}>
+					<div class='project-img-wrap'>
+						<div class={`project-thumb-placeholder ${p.coverClass}`} style='height:160px;'>
+							<img src={p.cover} alt={p.title} class='project-thumb-img' />
+						</div>
+						<div class='project-overlay'>
+							{p.tags.slice(0, 1).map((t) => (
+								<span class='project-badge'>{t}</span>
+							))}
+						</div>
+					</div>
+					<div class='project-body'>
+						<h3 class='project-name'>{p.title}</h3>
+						<p class='project-desc'>{p.desc}</p>
+						<button class='project-link' data-project={p.id}>
+							Ver detalles →
+						</button>
+					</div>
+				</div>
+			))
+		}
+
+	</div>
+
+</section>
+
+<!-- Inyectar datos del JSON al cliente -->
+<script id='projects-data' type='application/json' set:html={JSON.stringify(PROJECTS)} />
+
+<script>
+
+	const PROJECTS = JSON.parse(document.getElementById('projects-data').textContent);
+
+	// ── Lightbox ───────────────────────────────────────────────────────────────
+	const lightbox = document.getElementById('lightbox');
+	const lightboxImg = document.getElementById('lightboxImg');
+	const lightboxClose = document.getElementById('lightboxClose');
+	const lightboxPrev = document.getElementById('lightboxPrev');
+	const lightboxNext = document.getElementById('lightboxNext');
+	const lightboxCounter = document.getElementById('lightboxCounter');
+	const lightboxImgWrap = document.getElementById('lightboxImgWrap');
+
+	let currentGallery = [];
+	let currentIndex = 0;
+
+	function openLightbox(gallery, index) {
+
+		currentGallery = gallery;
+		currentIndex = index;
+
+		showLightboxImage();
+
+		lightbox.classList.add('open');
+
+		document.getElementById('projectModal').style.overflow = 'hidden';
+
+	}
+
+	function closeLightbox() {
+		lightbox.classList.remove('open');
+		document.getElementById('projectModal').style.overflow = 'auto';
+	}
+
+	function showLightboxImage() {
+
+		lightboxImg.src = currentGallery[currentIndex];
+		lightboxImg.alt = `Captura ${currentIndex + 1}`;
+		lightboxCounter.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
+		lightboxImgWrap.scrollTop = 0;
+
+		const single = currentGallery.length === 1;
+
+		lightboxPrev.style.display = single ? 'none' : '';
+		lightboxNext.style.display = single ? 'none' : '';
+
+	}
+
+	lightboxClose.addEventListener('click', closeLightbox);
+
+	lightboxPrev.addEventListener('click', () => {
+		currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+		showLightboxImage();
+	});
+
+	lightboxNext.addEventListener('click', () => {
+		currentIndex = (currentIndex + 1) % currentGallery.length;
+		showLightboxImage();
+	});
+
+	document.addEventListener('keydown', (e) => {
+		if (!lightbox.classList.contains('open')) return;
+		if (e.key === 'Escape') closeLightbox();
+		if (e.key === 'ArrowLeft') lightboxPrev.click();
+		if (e.key === 'ArrowRight') lightboxNext.click();
+	});
+
+	lightbox.addEventListener('click', (e) => {
+		if (e.target === lightbox) closeLightbox();
+	});
+
+	// ── Modal ──────────────────────────────────────────────────────────────────
+	const modalOverlay = document.getElementById('modalOverlay');
+	const projectModal = document.getElementById('projectModal');
+	const modalClose = document.getElementById('modalClose');
+	const modalInner = document.getElementById('modalInner');
+
+	function openProject(id) {
+
+		const p = PROJECTS.find((x) => x.id === id);
+		
+		if (!p) return;
+
+		const galleryHTML = p.gallery
+			.map((src, i) =>
+					`<img
+					class="modal-gallery-img"
+					src="${src}"
+					alt="${p.title} — captura ${i + 1}"
+					loading="lazy"
+					data-gallery-index="${i}"
+					data-project-id="${p.id}"
+					title="Click para ver completa"
+				/>`,
+			).join('');
+
+		modalInner.innerHTML = `
+			<img class="modal-cover" src="${p.cover}" alt="${p.title}" />
+			<div class="modal-content">
+				<div class="modal-tag">${p.category}</div>
+				<h2 class="modal-title">${p.title}</h2>
+				<p class="modal-desc">${p.desc}</p>
+				<div class="modal-links">
+					${p.url ? `<a href="${p.url}" target="_blank" class="modal-link primary">Ver sitio en vivo</a>` : ''}
+					${p.github ? `<a href="${p.github}" target="_blank" class="modal-link ghost">⌥ Ver en GitHub</a>` : ''}
+				</div>
+				<div class="modal-tech">
+					${p.tags.map((t) => `<span class="modal-tech-tag">${t}</span>`).join('')}
+				</div>
+				<div class="modal-gallery-title">// Capturas del proyecto <span class="modal-gallery-hint">— clic para ampliar</span></div>
+				<div class="modal-gallery">${galleryHTML}</div>
+			</div>
+		`;
+
+		modalOverlay.classList.add('open');
+		projectModal.classList.add('open');
+
+		document.body.style.overflow = 'hidden';
+
+	}
+
+	function closeModal() {
+
+		closeLightbox();
+		
+		modalOverlay.classList.remove('open');
+		projectModal.classList.remove('open');
+
+		// limpiamos
+		document.getElementById('lightboxImg').src = '';
+
+		document.body.style.overflow = '';
+
+	}
+
+	modalClose.addEventListener('click', closeModal);
+	modalOverlay.addEventListener('click', closeModal);
+
+	document.addEventListener('click', (e) => {
+
+		const target = e.target;
+
+		// Abrir lightbox desde galería del modal
+		const galleryImg = target.closest('[data-gallery-index]');
+
+		if (galleryImg) {
+		
+			const pid = galleryImg.dataset.projectId;
+			const index = parseInt(galleryImg.dataset.galleryIndex, 10);
+		
+			const p = PROJECTS.find((x) => x.id === pid);
+		
+			if (p) openLightbox(p.gallery, index);
+		
+			return;
+		
+		}
+
+		// Abrir modal de proyecto
+		const projectBtn = target.closest('[data-project]');
+		
+		if (projectBtn && !target.closest('.modal-gallery')) {
+			openProject(projectBtn.dataset.project);
+			return;
+		}
+
+	});
+
+	// ── All Projects ───────────────────────────────────────────────────────────
+	const allOverlay = document.getElementById('allProjectsOverlay');
+	const apGrid = document.getElementById('apGrid');
+	const apFilters = document.getElementById('apFilters');
+	const apSearch = document.getElementById('apSearch');
+	const apNoRes = document.getElementById('apNoResults');
+
+	let activeFilter = 'Todos';
+
+	function getAllCategories() {
+		return ['Todos', ...new Set(PROJECTS.map((p) => p.category))];
+	}
+
+	function renderFilters() {
+		apFilters.innerHTML = getAllCategories().map((cat) => `<button class="ap-filter ${cat === activeFilter ? 'active' : ''}" data-filter="${cat}">${cat}</button>`).join('');
+	}
+
+	apFilters.addEventListener('click', (e) => {
+		
+		const btn = e.target.closest('[data-filter]');
+
+		if (btn) {
+			activeFilter = btn.dataset.filter;
+			renderFilters();
+			renderApGrid();
+		}
+
+	});
+
+	function renderApGrid() {
+		
+		const q = apSearch.value.toLowerCase();
+
+		const filtered = PROJECTS.filter((p) => {
+			const matchCat = activeFilter === 'Todos' || p.category === activeFilter;
+			const matchQ = !q || p.title.toLowerCase().includes(q) || p.tags.some((t) => t.toLowerCase().includes(q));
+			return matchCat && matchQ;
+		});
+
+		apNoRes.style.display = filtered.length ? 'none' : 'block';
+		apGrid.innerHTML = filtered.map((p) => `
+			<div class="ap-card">
+				<div class="ap-card-img ${p.coverClass}" style="overflow:hidden;">
+					<img src="${p.cover}" alt="${p.title}" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" />
+					<div class="ap-card-overlay">
+						${p.tags.map((t) => `<span class="project-badge">${t}</span>`).join('')}
+					</div>
+				</div>
+				<div class="ap-card-body">
+					<div class="ap-card-name">${p.title}</div>
+					<div class="ap-card-desc">${p.desc.substring(0, 100)}...</div>
+				</div>
+				<div class="ap-card-footer">
+					<button class="project-link" style="font-size:0.65rem;" data-project="${p.id}">Ver detalles →</button>
+				</div>
+			</div>
+		`,
+			).join('');
+	}
+
+	apSearch.addEventListener('input', renderApGrid);
+
+	document.getElementById('btnVerTodos').addEventListener('click', () => {
+
+		renderFilters();
+		renderApGrid();
+
+		allOverlay.classList.add('open');
+
+		document.body.style.overflow = 'hidden';
+
+	});
+
+	document.getElementById('apClose').addEventListener('click', () => {
+		allOverlay.classList.remove('open');
+		document.body.style.overflow = '';
+	});
+
+</script>

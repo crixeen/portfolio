@@ -1,0 +1,69 @@
+@font-face {
+	font-family: 'DMMono';
+	src: url('/fonts/DM_Mono/DMMono-Light.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'DMMono';
+	src: url('/fonts/DM_Mono/DMMono-LightItalic.ttf') format('truetype');
+	font-weight: 300;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'DMMono';
+	src: url('/fonts/DM_Mono/DMMono-Regular.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'DMMono';
+	src: url('/fonts/DM_Mono/DMMono-Italic.ttf') format('truetype');
+	font-weight: 400;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'DMMono';
+	src: url('/fonts/DM_Mono/DMMono-Medium.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'DMMono';
+	src: url('/fonts/DM_Mono/DMMono-MediumItalic.ttf') format('truetype');
+	font-weight: 500;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'InstrumentSans';
+	src: url('/fonts/Instrument_Sans/InstrumentSans-VariableFont_wdth,wght.ttf') format('truetype');
+	font-weight: 100 900;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'InstrumentSans';
+	src: url('/fonts/Instrument_Sans/InstrumentSans-Italic-VariableFont_wdth,wght.ttf') format('truetype');
+	font-weight: 100 900;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'PlayfairDisplay';
+	src: url('/fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf') format('truetype');
+	font-weight: 400 900;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'PlayfairDisplay';
+	src: url('/fonts/Playfair_Display/PlayfairDisplay-Italic-VariableFont_wght.ttf') format('truetype');
+	font-weight: 400 900;
+	font-style: italic;
+}

@@ -1,0 +1,88 @@
+---
+const experiences = [
+	{
+		role: 'Desarrollador Web',
+		company: 'Alcaldía del Distrito Nacional',
+		period: 'oct. 2024 – Presente',
+		desc: 'Diseño y desarrollo de herramientas digitales para optimizar procesos internos. Creación de interfaces web funcionales y mantenimiento de aplicaciones existentes al servicio de la institución.',
+		delay: '',
+	},
+	{
+		role: 'Proyectos Freelance',
+		company: 'Crixen · Independiente',
+		period: '2022 – 2024',
+		desc: 'Desarrollo de proyectos para clientes independientes: landing pages, web apps y herramientas internas. Desde el diseño hasta el deploy, con foco en funcionalidad y experiencia de usuario.',
+		delay: 'reveal-delay-1',
+	},
+];
+---
+
+<section id='experience'>
+
+	<div class='exp-layout'>
+
+		<div class='exp-aside reveal'>
+
+			<div class='exp-aside-label'>// trayectoria</div>
+
+			<div class='exp-years' id='expYears'>1+</div>
+
+			<div class='exp-years-sub'>año de experiencia<br />profesional activa</div>
+
+			<hr class='exp-divider' />
+
+			<div class='exp-highlight'>"Cada proyecto que entrego es una lección que me llevo."</div>
+
+		</div>
+
+		<div class='exp-cards'>
+			{
+				experiences.map((exp) => (
+					<div class={`exp-card reveal ${exp.delay}`}>
+						<div class='exp-card-header'>
+							<div>
+								<div class='exp-role'>{exp.role}</div>
+								<div class='exp-company'>{exp.company}</div>
+							</div>
+							<div class='exp-period'>{exp.period}</div>
+						</div>
+						<p class='exp-desc'>{exp.desc}</p>
+					</div>
+				))
+			}
+		</div>
+
+	</div>
+
+</section>
+
+<script>
+
+	function calcYearsExp() {
+
+		const start = new Date(2024, 9, 1);
+		const now = new Date();
+
+		const months = (now.getFullYear() - start.getFullYear()) * 12 + now.getMonth() - start.getMonth();
+		const years = Math.floor(months / 12);
+		const rem = months % 12;
+
+		let label: string;
+
+		if (years === 0) {
+			label = rem + 'm';
+		} else if (rem === 0) {
+			label = years + '+';
+		} else {
+			label = years + '.' + Math.floor((rem / 12) * 10) + '+';
+		}
+
+		const el = document.getElementById('expYears');
+
+		if (el) el.textContent = label;
+
+	}
+
+	calcYearsExp();
+
+</script>

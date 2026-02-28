@@ -1,0 +1,83 @@
+---
+// src/components/Hero.astro
+---
+
+<section id='hero'>
+
+	<div class='hero-left'>
+
+		<div class='hero-eyebrow'>Desarrollador Web · República Dominicana</div>
+
+		<div class='hero-name'>Cristian Josue Encarnación Vicioso</div>
+
+		<h1 class='hero-title'>
+			Donde la creatividad y el código se <em>mezclan.</em>
+		</h1>
+
+		<p class='hero-desc'>
+			Construyo experiencias digitales que hacen que la tecnología se sienta más clara y accesible. Cada proyecto, preparado con calma y atención al detalle.
+		</p>
+
+		<div class='hero-actions'>
+			<a href='#projects' class='btn-primary'>Ver proyectos</a>
+			<a href='/public/pdf/cristian_josue_encarnacion_vicioso_cv_2025.pdf' target='_blank' class='btn-ghost'> Descargar CV </a>
+		</div>
+
+	</div>
+
+	<div class='hero-visual'>
+		<div class='hero-grid'></div>
+		<div class='hero-glow'></div>
+	</div>
+
+	<div class='hero-stats'>
+
+		<div class='hero-stat'>
+			<span class='hero-stat-n'>+10</span>
+			<span class='hero-stat-l'>Proyectos</span>
+		</div>
+
+		<div class='hero-stat'>
+			<span class='hero-stat-n' id='yearsExp'>1+</span>
+			<span class='hero-stat-l'>Año activo</span>
+		</div>
+
+		<div class='hero-stat'>
+			<span class='hero-stat-n'>Full</span>
+			<span class='hero-stat-l'>Stack</span>
+		</div>
+
+	</div>
+
+</section>
+
+<script>
+
+	function calcYears() {
+
+		const start = new Date(2024, 9, 1); // Nov 2024
+		const now = new Date();
+
+		const months = (now.getFullYear() - start.getFullYear()) * 12 + now.getMonth() - start.getMonth();
+		const years = Math.floor(months / 12);
+		const rem = months % 12;
+
+		let label: string;
+
+		if (years === 0) {
+			label = rem + 'm';
+		} else if (rem === 0) {
+			label = years + '+';
+		} else {
+			label = years + '.' + Math.floor((rem / 12) * 10) + '+';
+		}
+
+		const el = document.getElementById('yearsExp');
+
+		if (el) el.textContent = label;
+
+	}
+
+	calcYears();
+
+</script>

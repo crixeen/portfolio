@@ -1,0 +1,38 @@
+[
+	{
+		"id": "visas",
+		"title": "Visas United States",
+		"category": "Web App",
+		"tags": ["Web App", "HTML", "CSS", "JavaScript"],
+		"cover": "/images/projects/visas-cover.png",
+		"coverClass": "ph-blue",
+		"desc": "Herramienta en línea para evaluar y verificar el estatus de visas a Estados Unidos. El usuario responde un formulario interactivo con lógica condicional que determina si califica para distintos tipos de visa, presentando el resultado de forma clara y visual.",
+		"github": "",
+		"url": "https://check.visasunitedstates.com/",
+		"gallery": ["/images/projects/visas-1.png"]
+	},
+	{
+		"id": "ecash",
+		"title": "Ecash Club",
+		"category": "Landing Page",
+		"tags": ["Landing Page", "HTML", "CSS", "JavaScript"],
+		"cover": "/images/projects/ecashclub-cover.png",
+		"coverClass": "ph-brown",
+		"desc": "Sitio web promocional de un club de membresía exclusiva con sistema de sorteos y beneficios para sus usuarios. Diseñado para convertir visitantes en miembros activos, con animaciones y una estética premium.",
+		"github": "",
+		"url": "https://ecashclub.com",
+		"gallery": ["/images/projects/ecashclub-1.png"]
+	},
+	{
+		"id": "template",
+		"title": "Template Engine CLI",
+		"category": "CLI Tool",
+		"tags": ["CLI Tool", "JavaScript", "Node.js"],
+		"cover": "/images/projects/template-engine-cover.png",
+		"coverClass": "ph-gray",
+		"desc": "Herramienta de línea de comandos que permite crear nuevos proyectos rápidamente desde plantillas predefinidas. Reduce el tiempo de setup de un proyecto de horas a segundos, con soporte para múltiples frameworks y configuraciones personalizables.",
+		"github": "https://github.com/crixeen/template_engine",
+		"url": null,
+		"gallery": ["/images/projects/template-engine-1.png"]
+	}
+]

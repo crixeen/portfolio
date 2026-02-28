@@ -1,0 +1,54 @@
+---
+const skillGroups = [
+	{
+		title: 'Frontend',
+		items: ['HTML + CSS', 'JavaScript', 'React JS', 'Astro JS'],
+	},
+	{
+		title: 'Backend',
+		items: ['Node JS', 'Express JS'],
+	},
+	{
+		title: 'Database',
+		items: ['MySQL', 'SQLite', 'Supabase', 'Firebase'],
+	},
+	{
+		title: 'Tools',
+		items: ['Git', 'GitHub', 'Figma', 'Trello'],
+	},
+	{
+		title: 'Cloud & Deploy',
+		items: ['Cloudflare', 'Netlify', 'Render', 'Railway'],
+	},
+];
+---
+
+<section id='skills'>
+
+	<div class='skills-header'>
+	
+		<div>
+			<div class='section-tag'>Especialidades</div>
+			<h2 class='section-title'>Las herramientas<br />de mi <em>taller</em></h2>
+		</div>
+	
+		<p class='section-sub'>Las tecnologías y herramientas con las que construyo, día a día.</p>
+	
+	</div>
+
+	<div class='skills-layout'>
+		{
+			skillGroups.map((group, i) => (
+				<div class={`skill-category reveal${i > 0 ? ` reveal-delay-${i}` : ''}`}>
+					<div class='skill-category-title'>{group.title}</div>
+					<div class='skill-list'>
+						{group.items.map((item) => (
+							<div class='skill-item'>{item}</div>
+						))}
+					</div>
+				</div>
+			))
+		}
+	</div>
+
+</section>
