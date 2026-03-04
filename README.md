@@ -1,6 +1,6 @@
 # Cristian Josue · Portfolio Personal
 
-Portfolio web personal de **Cristian Josue Encarnación Vicioso** (Crixen), desarrollador web full stack desde República Dominicana. Sitio estático construido con [Astro](https://astro.build) y optimizado para despliegue en Netlify.
+Portfolio web personal de **Cristian Josue Encarnación Vicioso** (Crixeen), desarrollador web full stack desde República Dominicana. Sitio estático construido con [Astro](https://astro.build) y optimizado para despliegue en Netlify.
 
 ---
 
