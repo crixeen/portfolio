@@ -34,5 +34,17 @@
 		"github": "https://github.com/crixeen/template_engine",
 		"url": null,
 		"gallery": ["/images/projects/template-engine-1.png"]
+	},
+	{
+		"id": "vortex",
+		"title": "Vortex",
+		"category": "Developer Tool",
+		"tags": ["Developer Tool", "JavaScript", "Node.js"],
+		"cover": "/images/projects/vortex-cover.png",
+		"coverClass": "ph-purple",
+		"desc": "Herramienta enfocada en mejorar el flujo de trabajo de desarrollo, permitiendo automatizar procesos y estructurar proyectos de forma eficiente. Diseñada para desarrolladores que buscan velocidad, consistencia y escalabilidad en sus proyectos.",
+		"github": "https://github.com/crixeen/vortex",
+		"url": null,
+		"gallery": ["/images/projects/vortex-1.png", "/images/projects/vortex-2.png"]
 	}
 ]
